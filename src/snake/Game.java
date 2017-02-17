@@ -78,7 +78,7 @@ public class Game extends JPanel implements KeyListener {
 			player.incrementScore();
 		}
 
-		if (snake.kollision() == false) {
+		if (snake.kollision()) {
 			System.out.println("Kollision");
 			gameOver();
 		}

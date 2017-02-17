@@ -47,5 +47,15 @@ public class Punkt {
 		this.x = x;
 		this.y = y;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null)
+			return false;
+		if(obj.getClass() != this.getClass())
+			return false;
+		Punkt o = (Punkt) obj;
+		return x == o.x && y == o.y;
+	}
 
 }

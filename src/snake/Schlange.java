@@ -130,16 +130,25 @@ public class Schlange {
 	}
 
 	public boolean kollision() {
-		boolean alive = true;
+		boolean alive = false;
 
 		if (punkteListe.get(0).getX() < 15 || punkteListe.get(0).getX() > 570) {
-			alive = false;
+			alive = true;
 		}
 		if (punkteListe.get(0).getY() < 15 || punkteListe.get(0).getY() > 570) {
-			alive = false;
+			alive = true;
 		}
 
-		return alive;
+		return alive || kollidiereSelbst();
+	}
+
+	private boolean kollidiereSelbst() {
+		boolean collide = false;
+		Punkt kopf = punkteListe.get(0);
+		for (int i = 1; i < punkteListe.size(); i++) {
+			collide |= punkteListe.get(i).equals(kopf);
+		}
+		return collide;
 	}
 	// public void kollisionApfel(Apfel a){
 	// if(punkteListe.get(0).getX() == 200 && punkteListe.get(0).getY() == 200){

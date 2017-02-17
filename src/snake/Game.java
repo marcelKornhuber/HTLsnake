@@ -18,8 +18,8 @@ import javax.swing.JPanel;
  *
  */
 public class Game extends JPanel implements KeyListener {
-	private int breite = 600;
-	private int höhe = 600;
+	private int breite = 590;
+	private int höhe = 590;
 
 	private Schlange snake;
 	private Apfel apfel = new Apfel();

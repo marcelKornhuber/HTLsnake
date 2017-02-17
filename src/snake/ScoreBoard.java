@@ -36,8 +36,7 @@ public class ScoreBoard {
 		String[] player;
 
 		try {
-			BufferedReader f = new BufferedReader(new FileReader(
-					"C:/Users/Marcel/Documents/Marcel/HTBLuVA/3CHEL/FSST/Workspace/08_Snake/src/Ranking.txt"));
+			BufferedReader f = new BufferedReader(new FileReader("src/Ranking.txt"));
 
 			while ((line = f.readLine()) != null) {
 				player = line.split(",");
@@ -46,51 +45,54 @@ public class ScoreBoard {
 			}
 			f.close();
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			System.exit(1);
 		}
 
 	}
 
 	public void safe() {
 		try {
-			BufferedWriter wr = new BufferedWriter(new FileWriter(
-					"C:/Users/Marcel/Documents/Marcel/HTBLuVA/3CHEL/FSST/Workspace/08_Snake/src/Ranking.txt"));
+			BufferedWriter wr = new BufferedWriter(new FileWriter("src/Ranking.txt"));
 
 			for (Player a : scoreboard) {
 				wr.write(a.toString());
 			}
 			wr.close();
 		} catch (Exception e) {
-			System.out.println("Fehler bei der Bearbeitung des Rankings");
+			e.printStackTrace();
+			System.exit(1);
 		}
 
 	}
 
 	public void updateScoreBoard() {
-		// ScoreBoard order = new ScoreBoard(this);
-		// ArrayList<Player> orderPlayers = order.getPlayers();
-		Player hilfe = new Player(0, "TestPlayer", 0);
-		boolean control = true;
-
-		while (control) {
-			for (int i = 0; i < (scoreboard.size() - 1); i++) {
-				if (scoreboard.get(i).getScore() > scoreboard.get(i + 1).getScore()) {
-					hilfe = scoreboard.get(i);
-					scoreboard.set(i, scoreboard.get(i + 1));
-					scoreboard.set((i + 1), hilfe);
-				}
-			}
-
-			control = false;
-			for (int i = 0; i < (scoreboard.size() - 1); i++) {
-				if (scoreboard.get(i).getScore() > scoreboard.get(i + 1).getScore())
-					control = true;
-			}
-		}
-
+		sort(scoreboard);
 	}
 
 	private ArrayList<Player> getPlayers() {
 		return scoreboard;
+	}
+
+	private void sort(ArrayList<Player> str) {
+		int i, j;
+		int p1, p2;
+		int length = str.size();
+		Player tmp;
+		for (i = 0; i < length - 1; ++i) {
+			for (j = 0; j < length - 1; ++j) {
+				p1 = str.get(j).getScore();
+				p2 = str.get(j + 1).getScore();
+				if (p1 < p2) {
+					tmp = str.get(j);
+					str.set(j, str.get(j + 1));
+					str.set(j + 1, tmp);
+				}
+			}
+		}
+	}
+	
+	private void setRanks(ArrayList<Player> str){
+		
 	}
 }

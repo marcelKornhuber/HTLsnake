@@ -11,6 +11,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JPanel;
+
 /**
  * 
  * @author Marcel Kornhuber
@@ -22,6 +23,7 @@ public class Game extends JPanel implements KeyListener {
 
 	private Schlange snake;
 	private Apfel apfel = new Apfel();
+	private ScoreBoard scores;
 
 	Timer tmr;
 
@@ -31,15 +33,16 @@ public class Game extends JPanel implements KeyListener {
 		addKeyListener(this);
 		snake = new Schlange(this);
 		// addKeyListener(new MoveSnakeListener());
-		setPreferredSize(new Dimension(höhe, breite)); // Legt die größe des
-														// Feldes fest (mit
-														// setSize funktioniert
-														// es nicht)
 
+		// Legt die größe des Feldes fest (mit setSize funktioniert es nicht)
+		setPreferredSize(new Dimension(höhe, breite));
 		setBackground(Color.DARK_GRAY);
-
 		setFocusable(true);
-
+		scores = new ScoreBoard();
+		scores.load();
+		scores.updateScoreBoard();
+		scores.safe();
+		
 		tmr = new Timer();
 		tmr.schedule(new TimerTask() {
 			@Override

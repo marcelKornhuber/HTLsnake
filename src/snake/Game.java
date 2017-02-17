@@ -26,18 +26,20 @@ public class Game extends JPanel implements KeyListener {
 	private ScoreBoard scores;
 	
 	private Player player;
+	
+	GameOver gameover;
 
 	Timer tmr;
-
-	GameOver gameover = new GameOver();
 
 	public Game(Player x) {
 		addKeyListener(this);
 		player = x;
+		gameover = new GameOver(player);
 		snake = new Schlange(this);
 
 		// Legt die größe des Feldes fest (mit setSize funktioniert es nicht)
 		setPreferredSize(new Dimension(höhe, breite));
+		System.out.println(höhe +  "," + breite);
 		//setSize(new Dimension(höhe, breite));
 		setBackground(Color.DARK_GRAY);
 		setFocusable(true);
@@ -91,6 +93,7 @@ public class Game extends JPanel implements KeyListener {
 	}
 
 	private void gameOver() {
+		scores.addPlayer(player);
 		tmr.cancel();
 		gameover.setVisible(true);
 	}

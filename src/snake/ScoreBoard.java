@@ -25,6 +25,7 @@ public class ScoreBoard {
 
 	public void addPlayer(Player neu) {
 		scoreboard.add(neu);
+		updateScoreBoard();
 	}
 
 	public void deleteKunde(Player falsch) {

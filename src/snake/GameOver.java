@@ -25,26 +25,11 @@ public class GameOver extends JFrame {
 	private Label label;
 	private Label label_Points;
 	private Label label_Ranking;
-	private JTextField points;
 	private JTextField rank;
+	private JTextField points;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GameOver frame = new GameOver();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	public GameOver(/*String player , String Score*/) {
+	public GameOver(Player x) {
 		setFont(new Font("Dialog", Font.BOLD, 15));
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Marcel\\Documents\\Marcel\\HTBLuVA\\3CHEL\\FSST\\Snake\\RotesX.jpg"));
 		setTitle("GAME OVER");
@@ -84,16 +69,22 @@ public class GameOver extends JFrame {
 		label_Ranking.setBounds(37, 97, 74, 22);
 		contentPane.add(label_Ranking);
 		
+		rank = new JTextField();
+		rank.setEditable(false);
+		rank.setBounds(151, 99, 107, 20);
+		contentPane.add(rank);
+		rank.setColumns(10);
+		
+		
 		points = new JTextField();
 		points.setEditable(false);
-		points.setBounds(151, 99, 107, 20);
+		points.setBounds(151, 149, 107, 20);
 		contentPane.add(points);
 		points.setColumns(10);
 		
-		rank = new JTextField();
-		rank.setEditable(false);
-		rank.setBounds(151, 149, 107, 20);
-		contentPane.add(rank);
-		rank.setColumns(10);
+		rank.setText(String.valueOf(x.getRank()));
+		points.setText(String.valueOf(x.getScore()));
+		
+		
 	}
 }

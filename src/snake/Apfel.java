@@ -35,7 +35,7 @@ public class Apfel {
 	 * @return
 	 */
 	private int randomPosition(int max) {
-		return random.nextInt(max / 15 + 1) * 15;
+		return random.nextInt(max / 15) * 15 + 15;
 	}
 
 	public Punkt getPosition() {

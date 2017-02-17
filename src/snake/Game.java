@@ -64,8 +64,9 @@ public class Game extends JPanel implements KeyListener {
 		g2.fillRect(0, 585, 600, 15);
 		// g2.fillRect(200, 200, 20, 20);
 
-		snake.getGraphics(g2, this);
 		apfel.getGraphics(g2, this);
+		snake.getGraphics(g2, this);
+		
 
 		if(snake.kollisionApfel(apfel)){
 			apfel.newApplePosition();

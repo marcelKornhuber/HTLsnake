@@ -142,4 +142,17 @@ public class Schlange {
 	// a.newApplePosition();
 	// }
 	// }
+
+	public boolean kollisionApfel(Apfel a) {
+		boolean collide = true;
+		int x = punkteListe.get(0).getX();
+		int y = punkteListe.get(0).getY();
+		int ax = a.getPosition().getX();
+		int ay = a.getPosition().getY();
+		collide &= x >= ax;
+		collide &= x <= ax;
+		collide &= y >= ay;
+		collide &= y <= ay;
+		return collide;
+	}
 }

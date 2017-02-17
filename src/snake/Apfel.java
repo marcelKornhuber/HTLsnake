@@ -23,8 +23,8 @@ public class Apfel {
 
 	// neuen Apfel zeichnen
 	public void newApplePosition() {
-		position.setX((int) (random.nextDouble() * 560) + 15);
-		position.setY((int) (random.nextDouble() * 560) + 15);
+		position.setX(randomPosition(585));
+		position.setY(randomPosition(585));
 	}
 
 	/**

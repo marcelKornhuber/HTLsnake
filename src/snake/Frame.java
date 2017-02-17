@@ -1,11 +1,11 @@
 package snake;
 
-import java.awt.EventQueue;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 import javax.swing.JFrame;
-
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Frame extends JFrame{
 
 	public Frame() {

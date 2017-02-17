@@ -1,5 +1,9 @@
 package snake;
-
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Player {
 
 	private int score;

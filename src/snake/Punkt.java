@@ -1,5 +1,9 @@
 package snake;
-
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Punkt {
 
 	private int x, y;

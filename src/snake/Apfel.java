@@ -4,9 +4,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.util.Random;
-
-import javax.swing.ImageIcon;
-
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Apfel {
 
 	public static Image apfel;

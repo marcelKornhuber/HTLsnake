@@ -4,18 +4,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Game extends JPanel implements KeyListener {
 	private int breite = 600;
 	private int höhe = 600;
@@ -66,13 +66,12 @@ public class Game extends JPanel implements KeyListener {
 
 		apfel.getGraphics(g2, this);
 		snake.getGraphics(g2, this);
-		
 
-		if(snake.kollisionApfel(apfel)){
+		if (snake.kollisionApfel(apfel)) {
 			apfel.newApplePosition();
 			snake.addKörper();
 		}
-		
+
 		if (snake.kollision() == false) {
 			System.out.println("Kollision");
 			tmr.cancel();

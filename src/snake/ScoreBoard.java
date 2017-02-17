@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class ScoreBoard {
 
 	private ArrayList<Player> scoreboard;
@@ -13,7 +18,7 @@ public class ScoreBoard {
 	public ScoreBoard() {
 		scoreboard = new ArrayList<Player>();
 	}
-	
+
 	public ScoreBoard(ScoreBoard x) {
 		this.scoreboard = x.getPlayers();
 	}
@@ -60,32 +65,31 @@ public class ScoreBoard {
 		}
 
 	}
-	
+
 	public void updateScoreBoard() {
-		//ScoreBoard order = new ScoreBoard(this);
-		//ArrayList<Player> orderPlayers = order.getPlayers();
-		Player hilfe = new Player(0,"TestPlayer",0);
+		// ScoreBoard order = new ScoreBoard(this);
+		// ArrayList<Player> orderPlayers = order.getPlayers();
+		Player hilfe = new Player(0, "TestPlayer", 0);
 		boolean control = true;
-		
-		while (control){
-			for (int i = 0; i < (scoreboard.size() - 1); i ++){
-				if (scoreboard.get(i).getScore() > scoreboard.get(i+1).getScore()){
+
+		while (control) {
+			for (int i = 0; i < (scoreboard.size() - 1); i++) {
+				if (scoreboard.get(i).getScore() > scoreboard.get(i + 1).getScore()) {
 					hilfe = scoreboard.get(i);
-					scoreboard.set(i, scoreboard.get(i+1));
-					scoreboard.set((i+1),hilfe);
+					scoreboard.set(i, scoreboard.get(i + 1));
+					scoreboard.set((i + 1), hilfe);
 				}
 			}
-			
+
 			control = false;
-				for (int i = 0; i < (scoreboard.size() - 1); i++){
-					if (scoreboard.get(i).getScore() > scoreboard.get(i+1).getScore())
-					control = true;	
-				}
+			for (int i = 0; i < (scoreboard.size() - 1); i++) {
+				if (scoreboard.get(i).getScore() > scoreboard.get(i + 1).getScore())
+					control = true;
+			}
 		}
-		
-		
+
 	}
-	
+
 	private ArrayList<Player> getPlayers() {
 		return scoreboard;
 	}

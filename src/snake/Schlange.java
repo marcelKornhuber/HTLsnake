@@ -6,6 +6,11 @@ import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Marcel Kornhuber
+ *
+ */
 public class Schlange {
 
 	public static final int LEFT = 0, RIGHT = 1, UP = 2, DOWN = 3; // vom

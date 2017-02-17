@@ -68,31 +68,40 @@ public class ScoreBoard {
 
 	public void updateScoreBoard() {
 		sort(scoreboard);
+		setRanks(scoreboard);
 	}
 
 	private ArrayList<Player> getPlayers() {
 		return scoreboard;
 	}
 
-	private void sort(ArrayList<Player> str) {
+	private void sort(ArrayList<Player> list) {
 		int i, j;
 		int p1, p2;
-		int length = str.size();
+		int length = list.size();
 		Player tmp;
 		for (i = 0; i < length - 1; ++i) {
 			for (j = 0; j < length - 1; ++j) {
-				p1 = str.get(j).getScore();
-				p2 = str.get(j + 1).getScore();
+				p1 = list.get(j).getScore();
+				p2 = list.get(j + 1).getScore();
 				if (p1 < p2) {
-					tmp = str.get(j);
-					str.set(j, str.get(j + 1));
-					str.set(j + 1, tmp);
+					tmp = list.get(j);
+					list.set(j, list.get(j + 1));
+					list.set(j + 1, tmp);
 				}
 			}
 		}
 	}
-	
-	private void setRanks(ArrayList<Player> str){
-		
+
+	private void setRanks(ArrayList<Player> list) {
+		int rank = 1;
+		int lastScore = list.get(0).getScore();
+		list.get(0).setRank(1);
+		for (int i = 1; i < list.size(); i++) {
+			Player p = list.get(i);
+			if(p.getScore() != lastScore)
+				rank++;
+			p.setRank(rank);
+		}
 	}
 }

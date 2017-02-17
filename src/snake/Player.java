@@ -35,4 +35,8 @@ public class Player {
 	public String toString() {
 		return rank + "," + name + "," + score + System.lineSeparator();
 	}
+
+	public void setRank(int rank) {
+		this.rank = rank;
+	}
 }

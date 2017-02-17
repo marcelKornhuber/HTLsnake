@@ -35,8 +35,8 @@ public class Schlange {
 
 		// Images für Kopf und Körper einlesen
 
-		körper = Helper.loadImage("src/resources/körper2.png");
-		kopf = Helper.loadImage("src/resources/kopf2.png");
+		körper = Helper.loadImage("src/resources/körper3.png");
+		kopf = Helper.loadImage("src/resources/kopf3.png");
 
 		// Breite und Höhe des Spielfeldes einlesen
 		this.breite = g.getBreite();

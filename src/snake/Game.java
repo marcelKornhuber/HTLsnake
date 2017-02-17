@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
@@ -24,12 +24,12 @@ public class Game extends JPanel implements KeyListener {
 	private Schlange snake;
 	private Apfel apfel = new Apfel();
 	private ScoreBoard scores;
-	
-	private Player player;
-	
-	GameOver gameover;
 
-	Timer tmr;
+	private Player player;
+
+	GameOver gameover;
+	//Kann den selben task mehrmals erhalten
+	ScheduledThreadPoolExecutor tmr;
 
 	public Game(Player x) {
 		addKeyListener(this);
@@ -39,23 +39,17 @@ public class Game extends JPanel implements KeyListener {
 
 		// Legt die größe des Feldes fest (mit setSize funktioniert es nicht)
 		setPreferredSize(new Dimension(höhe, breite));
-		System.out.println(höhe +  "," + breite);
-		//setSize(new Dimension(höhe, breite));
+		System.out.println(höhe + "," + breite);
+		// setSize(new Dimension(höhe, breite));
 		setBackground(Color.DARK_GRAY);
 		setFocusable(true);
 		scores = new ScoreBoard();
 		scores.load();
 		scores.updateScoreBoard();
 		scores.safe();
-		
-		tmr = new Timer();
-		tmr.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				snake.bewege();
-				repaint();
-			}
-		}, 1000, 400);
+
+		tmr = new ScheduledThreadPoolExecutor(0);
+		tmr.schedule(new MoveTask(), 1, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -85,7 +79,7 @@ public class Game extends JPanel implements KeyListener {
 			System.out.println("Kollision");
 			gameOver();
 		}
-		
+
 		g2.setColor(Color.WHITE);
 		g2.drawString("Punkte: ", 10, 13);
 		g2.drawString(String.valueOf(player.getScore()), 55, 13);
@@ -94,7 +88,8 @@ public class Game extends JPanel implements KeyListener {
 
 	private void gameOver() {
 		scores.addPlayer(player);
-		tmr.cancel();
+		scores.safe();
+		tmr.shutdown();
 		gameover.setVisible(true);
 	}
 
@@ -150,5 +145,19 @@ public class Game extends JPanel implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+	}
+
+	private class MoveTask implements Runnable {
+
+		private static final int cap = 50;
+		private static final int start = 25;
+
+		@Override
+		public void run() {
+			snake.bewege();
+			repaint();
+			tmr.schedule(this, 10000000L / (player.getScore() / cap + start), TimeUnit.MICROSECONDS);
+		}
+
 	}
 }

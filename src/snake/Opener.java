@@ -23,6 +23,7 @@ public class Opener extends JFrame {
 	private JButton btnRangliste;
 	private JButton btnStartGame;
 	private JLabel lblSnake;
+	private Starter starter;
 	
 
 	public static void main(String[] args) {
@@ -39,6 +40,7 @@ public class Opener extends JFrame {
 	}
 
 	public Opener() {
+		starter = new Starter();
 		setTitle("Snake\r\n");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,10 +71,8 @@ public class Opener extends JFrame {
 				Player spieler = new Player(0, textField.getText().trim(), 0);
 				
 				//JFrame erstellt
-				Frame snake = new Frame(spieler);
+				starter.start(spieler);
 				
-				//JFrame sichtbar machen
-				snake.setVisible(true);
 				setVisible(false);
 				
 				

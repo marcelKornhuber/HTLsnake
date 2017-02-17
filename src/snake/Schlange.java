@@ -36,6 +36,9 @@ public class Schlange {
 
 	private boolean addKörper = false;
 
+	// TODO Nur zum Testen
+	private volatile long lastTime;
+
 	public Schlange(Game g) {
 
 		// Images für Kopf und Körper einlesen
@@ -102,6 +105,9 @@ public class Schlange {
 	}
 
 	public void bewege() {
+		System.out.println("Needed: " + ((System.nanoTime() - lastTime) / 1000000) + "ms");
+		lastTime = System.nanoTime();
+		System.out.println(Thread.currentThread().getName());
 		Punkt körperi = null; // create neuenKörper
 		if (addKörper) { // wenn boolean addKörper true ist: wird körperi mit
 							// dem letzen Körper der vorhanden ist überschrieben
@@ -123,6 +129,7 @@ public class Schlange {
 												// des Kopfes...
 		// Kopf um die pixel der Fahrtrichtung verschieben
 		kopfPunkt.set(kopfPunkt.getX() + movex, kopfPunkt.getY() + movey);
+		System.out.println(kopfPunkt.getX() + "|" + kopfPunkt.getY());
 	}
 
 	public void addKörper() { // boolean addKörperteil

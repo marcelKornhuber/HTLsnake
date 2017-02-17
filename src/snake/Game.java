@@ -7,8 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JPanel;
 
@@ -26,10 +24,10 @@ public class Game extends JPanel implements KeyListener {
 	private ScoreBoard scores;
 
 	private Player player;
+	private boolean end = false;
 
 	GameOver gameover;
-	//Kann den selben task mehrmals erhalten
-	ScheduledThreadPoolExecutor tmr;
+	// Kann den selben task mehrmals erhalten
 
 	public Game(Player x) {
 		addKeyListener(this);
@@ -47,9 +45,6 @@ public class Game extends JPanel implements KeyListener {
 		scores.load();
 		scores.updateScoreBoard();
 		scores.safe();
-
-		tmr = new ScheduledThreadPoolExecutor(0);
-		tmr.schedule(new MoveTask(), 1, TimeUnit.SECONDS);
 	}
 
 	@Override
@@ -87,10 +82,14 @@ public class Game extends JPanel implements KeyListener {
 	}
 
 	private void gameOver() {
+		end = true;
 		scores.addPlayer(player);
 		scores.safe();
-		tmr.shutdown();
 		gameover.setVisible(true);
+	}
+
+	public boolean isEnd() {
+		return end;
 	}
 
 	public int getBreite() {
@@ -147,17 +146,10 @@ public class Game extends JPanel implements KeyListener {
 		// TODO Auto-generated method stub
 	}
 
-	private class MoveTask implements Runnable {
-
-		private static final int cap = 50;
-		private static final int start = 25;
-
-		@Override
-		public void run() {
+	public void tick() {
+		if (!end) {
 			snake.bewege();
 			repaint();
-			tmr.schedule(this, 10000000L / (player.getScore() / cap + start), TimeUnit.MICROSECONDS);
 		}
-
 	}
 }

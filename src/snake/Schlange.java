@@ -2,15 +2,9 @@ package snake;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javax.swing.ImageIcon;
 
 public class Schlange {
 
@@ -40,10 +34,9 @@ public class Schlange {
 	public Schlange(Game g) {
 
 		// Images für Kopf und Körper einlesen
-		ImageIcon icon_körper = new ImageIcon("C:/Users/Marcel/Documents/Marcel/HTBLuVA/3CHEL/FSST/Snake/körper.png");
-		körper = icon_körper.getImage();
-		ImageIcon icon_kopf = new ImageIcon("C:/Users/Marcel/Documents/Marcel/HTBLuVA/3CHEL/FSST/Snake/kopf.png");
-		kopf = icon_kopf.getImage();
+
+		körper = Helper.loadImage("src/resources/körper.png");
+		kopf = Helper.loadImage("src/resources/kopf.png");
 
 		// Breite und Höhe des Spielfeldes einlesen
 		this.breite = g.getBreite();
@@ -94,6 +87,16 @@ public class Schlange {
 
 	public void getGraphics(Graphics g, ImageObserver img) {
 
+		g.drawImage(kopf, punkteListe.get(0).getX(), punkteListe.get(0).getY(), img); // Kopf
+																						// zeichnen
+		// alle Körperteile zeichnen, die in der Punkteliste vorhanden sind
+		for (int i = 1; i < punkteListe.size(); i++) {
+			g.drawImage(körper, punkteListe.get(i).getX(), punkteListe.get(i).getY(), img);
+		}
+
+	}
+
+	public void bewege() {
 		Punkt körperi = null; // create neuenKörper
 		if (addKörper) { // wenn boolean addKörper true ist: wird körperi mit
 							// dem letzen Körper der vorhanden ist überschrieben
@@ -113,25 +116,8 @@ public class Schlange {
 
 		Punkt kopfPunkt = punkteListe.get(0); // neuer Punkt mit der Position
 												// des Kopfes...
-
-		kopfPunkt.set(kopfPunkt.getX() + movex, kopfPunkt.getY() + movey); // Kopfi
-																			// um
-																			// die
-																			// pixel
-																			// der
-																			// Fahrtrichtung
-																			// verschieben
-
-		g.drawImage(kopf, punkteListe.get(0).getX(), punkteListe.get(0).getY(), img); // Kopf
-																						// zeichnen
-
-		for (int i = 1; i < punkteListe.size(); i++) { // alle Körperteile
-														// zeichnen, die in der
-														// Punkteliste vorhanden
-														// sind
-			g.drawImage(körper, punkteListe.get(i).getX(), punkteListe.get(i).getY(), img);
-		}
-
+		// Kopf um die pixel der Fahrtrichtung verschieben
+		kopfPunkt.set(kopfPunkt.getX() + movex, kopfPunkt.getY() + movey);
 	}
 
 	public void addKörper() { // boolean addKörperteil
@@ -147,13 +133,13 @@ public class Schlange {
 		if (punkteListe.get(0).getY() <= 15 || punkteListe.get(0).getY() >= 565) {
 			alive = false;
 		}
-		
+
 		return alive;
 	}
-//	 public void kollisionApfel(Apfel a){
-//	 if(punkteListe.get(0).getX() == 200 && punkteListe.get(0).getY() == 200){
-//	 addKörper();
-//	 a.newApplePosition();
-//	 }
-//	 }
+	// public void kollisionApfel(Apfel a){
+	// if(punkteListe.get(0).getX() == 200 && punkteListe.get(0).getY() == 200){
+	// addKörper();
+	// a.newApplePosition();
+	// }
+	// }
 }

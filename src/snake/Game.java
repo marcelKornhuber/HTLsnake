@@ -84,8 +84,8 @@ public class Game extends JPanel implements KeyListener {
 		}
 		
 		g2.setColor(Color.WHITE);
-		g2.drawString("Punkte: ", 10, 15);
-		g2.drawString(String.valueOf(player.getScore()), 30, 15);
+		g2.drawString("Punkte: ", 10, 13);
+		g2.drawString(String.valueOf(player.getScore()), 55, 13);
 
 	}
 

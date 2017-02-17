@@ -1,0 +1,9 @@
+2,Loser,1
+1,Marcel,10
+3,Sieger,150
+3,Sieger,150
+3,Sieger,150
+3,Sieger,150
+3,Sieger,150
+3,Sieger,150
+3,Sieger,150

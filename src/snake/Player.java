@@ -39,4 +39,8 @@ public class Player {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
+	
+	public void incrementScore() {
+		score += 10;
+	}
 }

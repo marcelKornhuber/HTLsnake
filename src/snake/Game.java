@@ -24,15 +24,17 @@ public class Game extends JPanel implements KeyListener {
 	private Schlange snake;
 	private Apfel apfel = new Apfel();
 	private ScoreBoard scores;
+	
+	private Player player;
 
 	Timer tmr;
 
 	GameOver gameover = new GameOver();
 
-	public Game() {
+	public Game(Player x) {
 		addKeyListener(this);
+		player = x;
 		snake = new Schlange(this);
-		// addKeyListener(new MoveSnakeListener());
 
 		// Legt die größe des Feldes fest (mit setSize funktioniert es nicht)
 		setPreferredSize(new Dimension(höhe, breite));
@@ -73,14 +75,21 @@ public class Game extends JPanel implements KeyListener {
 		if (snake.kollisionApfel(apfel)) {
 			apfel.newApplePosition();
 			snake.addKörper();
+			player.incrementScore();
 		}
 
 		if (snake.kollision() == false) {
 			System.out.println("Kollision");
-			tmr.cancel();
-			gameover.setVisible(true);
+			gameOver();
 		}
+		
+		g2.drawString(String.valueOf(player.getScore()), 10, 10);
 
+	}
+
+	private void gameOver() {
+		tmr.cancel();
+		gameover.setVisible(true);
 	}
 
 	public int getBreite() {
@@ -135,6 +144,5 @@ public class Game extends JPanel implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-
 	}
 }

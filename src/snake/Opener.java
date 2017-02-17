@@ -23,7 +23,6 @@ public class Opener extends JFrame {
 	private JButton btnRangliste;
 	private JButton btnStartGame;
 	private JLabel lblSnake;
-	Frame snake = new Frame(); // JFrame erstellt
 	
 
 	public static void main(String[] args) {
@@ -66,13 +65,18 @@ public class Opener extends JFrame {
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				//Spieler einlesen
+				Player spieler = new Player(0, textField.getText().trim(), 0);
+				
+				//JFrame erstellt
+				Frame snake = new Frame(spieler);
+				
 				//JFrame sichtbar machen
 				snake.setVisible(true);
 				setVisible(false);
 				
 				
-				//Spieler einlesen
-				//...
+				
 			}
 		});
 		btnStartGame.setBounds(203, 99, 125, 30);

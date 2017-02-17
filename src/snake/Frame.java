@@ -8,8 +8,8 @@ import javax.swing.JFrame;
  */
 public class Frame extends JFrame{
 
-	public Frame() {
-		add(new Game()); 			// JPanel hinzufügen
+	public Frame(Player x) {
+		add(new Game(x)); 			// JPanel hinzufügen
 		setResizable(false); 		// Größe des Fensters ist nich veränderbar
 		pack(); 					// Ohne Pack() werden die Eigenschaften von Game() nicht einbezogen
 		setLocation(400, 50);

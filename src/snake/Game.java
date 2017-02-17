@@ -38,6 +38,7 @@ public class Game extends JPanel implements KeyListener {
 
 		// Legt die größe des Feldes fest (mit setSize funktioniert es nicht)
 		setPreferredSize(new Dimension(höhe, breite));
+		//setSize(new Dimension(höhe, breite));
 		setBackground(Color.DARK_GRAY);
 		setFocusable(true);
 		scores = new ScoreBoard();
